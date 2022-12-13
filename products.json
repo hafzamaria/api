@@ -1,0 +1,50 @@
+[
+    {
+        "name": "iphone",
+        "price": 154,
+        "feature": true,
+        "company": "apple"
+
+    },
+    {
+        "name": "iphone!0",
+        "price": 1154,
+        "feature": true,
+        "company": "apple"
+
+    },
+    {
+        "name": "watch",
+        "price": 204,
+        "company": "apple"
+
+    },
+    {
+        "name": "iphone",
+        "price": 154,
+        "feature": true,
+        "company": "apple"
+
+    },
+    {
+        "name": "android",
+        "price": 154,
+        "feature": true,
+        "company": "samsung"
+
+    },
+    {
+        "name": "watch",
+        "price": 154,
+        "company": "samsung"
+
+    },
+    {
+        "name": "LED",
+        "price": 154,
+        "feature": true,
+        "company": "dell"
+
+    }
+
+]
