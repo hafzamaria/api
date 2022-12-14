@@ -26,7 +26,7 @@ const productSchema = new mongoose.Schema({ ///from mongoose
       type:Number,
        required:[true, 'price must be provided'],
       },
- featured:{
+ feature:{
   type:Boolean,
    required:false,
   },
@@ -50,16 +50,38 @@ const productSchema = new mongoose.Schema({ ///from mongoose
 
 //  ////////////////////////////////////////
 
+
 app.get('/', async (req , res) => {
-  const myData = await productModel.find(req.query);
+
+  const { company , name , price} = req.query;
+const queryObject = {};
+
+if(company) {
+  queryObject.company = company;
+  console.log(queryObject);
+}
+if(name){
+  queryObject.name = name;
+  console.log(queryObject);
+}
+if(price){
+  queryObject.price = price;
+  console.log(queryObject);
+}
+ 
+  const myData = await productModel.find(queryObject);
   console.log(req.query);
   res.status(200).send({myData: myData});
 })
+
 app.get('/testing', async (req , res) => {
   const myData = await productModel.find(req.query);
   ////req.query se hm ksi b chez ko uski compny ya name ya ksi b chez se search kr skte h(req.query)is mostly used for searching,sorting & pagination
   console.log(req.query);
-  res.status(200).send({myData: myData});
+  
+    res.status(200).send({myData: myData});
+  
+  
   // res.status(200).json({msg:'I am getAllProductsTesting'})
   
 })
@@ -67,10 +89,11 @@ app.get('/testing', async (req , res) => {
 const start = async () =>{
     try{
       // await connectDB(process.env.MONGODB_URL)
+      await productModel.deleteMany();///is se xtra data ni aaega
     await productModel.create([
       {
           "name": "iphone",
-          "price": 154,
+          "price": 150,
           "feature": true,
           "company": "apple"
   
@@ -91,14 +114,14 @@ const start = async () =>{
       {
           "name": "iphone",
           "price": 154,
-          "feature": true,
+          "feature": false,
           "company": "apple"
   
       },
       {
           "name": "android",
           "price": 154,
-          "feature": true,
+          "feature": false,
           "company": "samsung"
   
       },
@@ -111,14 +134,14 @@ const start = async () =>{
       {
           "name": "LED",
           "price": 154,
-          "feature": true,
+          "feature": false,
           "company": "dell"
   
       },
       {
         "name": "LED",
-        "price": 154,
-        "feature": true,
+        "price": 157,
+        "feature": false,
         "company": "mi"
 
     }
