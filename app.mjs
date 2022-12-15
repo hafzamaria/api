@@ -58,17 +58,20 @@ const queryObject = {};
 
 if(company) {
   queryObject.company = company;
-  console.log(queryObject);
+ 
 }
 if(name){
-  queryObject.name = name;
-  console.log(queryObject);
+  queryObject.name ={$regex:name , $options:"i"}////$regex from mongodb $regex use for searching filter
+
 }
 if(price){
   queryObject.price = price;
-  console.log(queryObject);
 }
- 
+
+if(feature){
+  queryObject.feature = feature;
+}
+console.log(queryObject);
   const myData = await productModel.find(queryObject);
   console.log(req.query);
   res.status(200).send({myData: myData});
@@ -92,7 +95,7 @@ const start = async () =>{
       await productModel.deleteMany();///is se xtra data ni aaega
     await productModel.create([
       {
-          "name": "iphone",
+          "name": "iphone12",
           "price": 150,
           "feature": true,
           "company": "apple"
@@ -112,7 +115,7 @@ const start = async () =>{
   
       },
       {
-          "name": "iphone",
+          "name": "iphone13",
           "price": 154,
           "feature": false,
           "company": "apple"
