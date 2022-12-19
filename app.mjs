@@ -53,7 +53,7 @@ const productSchema = new mongoose.Schema({ ///from mongoose
 
 app.get('/', async (req , res) => {
 
-  const { company , name , price} = req.query;
+  const { company , name , price,sort , select} = req.query;
 const queryObject = {};
 
 if(company) {
@@ -68,17 +68,30 @@ if(price){
   queryObject.price = price;
 }
 
-if(feature){
-  queryObject.feature = feature;
+// if(feature){
+//   queryObject.feature = feature;
+// }
+ 
+let apiData = productModel.find(queryObject);
+
+if (sort){
+  let sortFix =sort.split(',').join ( ' ');
+  apiData =apiData.sort( sortFix);
+}
+if (select){
+  // let selectFix =select.replace(',' , ' ');
+  let selectFix =select.split(',').join ( ' ');
+  apiData =apiData.select( selectFix);
 }
 console.log(queryObject);
-  const myData = await productModel.find(queryObject);
+  const myData = await apiData;
+  // .sort('price');///we can search in  asending order by .sort('name')('price')& decending order by .sort('-name')('-price')
   console.log(req.query);
   res.status(200).send({myData: myData});
 })
 
 app.get('/testing', async (req , res) => {
-  const myData = await productModel.find(req.query);
+  const myData = await productModel.find(req.query).select('name company');
   ////req.query se hm ksi b chez ko uski compny ya name ya ksi b chez se search kr skte h(req.query)is mostly used for searching,sorting & pagination
   console.log(req.query);
   
