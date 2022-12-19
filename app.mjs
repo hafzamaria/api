@@ -61,7 +61,7 @@ if(company) {
  
 }
 if(name){
-  queryObject.name ={$regex:name , $options:"i"}////$regex from mongodb $regex use for searching filter
+  queryObject.name ={$regex:name , $options:"a"}////$regex from mongodb $regex use for searching filter
 
 }
 if(price){
@@ -83,11 +83,18 @@ if (select){
   let selectFix =select.split(',').join ( ' ');
   apiData =apiData.select( selectFix);
 }
+
+let page = Number(req.query.page) || 1;
+let limit=Number(req.query.limit) || 3;
+let skip=(page - 1)* limit;
+
+apiData = apiData.skip(skip).limit(limit);////pagination formula
+
 console.log(queryObject);
   const myData = await apiData;
   // .sort('price');///we can search in  asending order by .sort('name')('price')& decending order by .sort('-name')('-price')
   console.log(req.query);
-  res.status(200).send({myData: myData});
+  res.status(200).json({myData , nbHits:myData.length});
 })
 
 app.get('/testing', async (req , res) => {
