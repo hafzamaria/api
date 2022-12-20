@@ -59,7 +59,7 @@ const productSchema = new mongoose.Schema({ ///from mongoose
 //  ////////////////////////////////////////
 
 
-app.get('/', async (req , res) => {
+app.get('/Products', async (req , res) => {
 
   const { company , name , price,sort , select} = req.query;
 const queryObject = {};
