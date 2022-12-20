@@ -45,6 +45,14 @@ const productSchema = new mongoose.Schema({ ///from mongoose
           message:`{values} is not supported`,
        }
       },
+     
+      category:{
+        type:String,
+        enum:{
+           values:["mobile" , 'laptop' ,'watch', 'led'],
+           message:`{values} is not supported`,
+        }
+      }
  });
  const productModel = mongoose.model('Products', productSchema);
 
@@ -97,6 +105,8 @@ console.log(queryObject);
   res.status(200).json({myData , nbHits:myData.length});
 })
 
+https://api-production-66d4.up.railway.app
+////api link
 app.get('/testing', async (req , res) => {
   const myData = await productModel.find(req.query).select('name company');
   ////req.query se hm ksi b chez ko uski compny ya name ya ksi b chez se search kr skte h(req.query)is mostly used for searching,sorting & pagination
@@ -118,55 +128,55 @@ const start = async () =>{
           "name": "iphone12",
           "price": 150,
           "feature": true,
-          "company": "apple"
-  
+          "company": "apple",
+  ' category':"mobile",
       },
       {
           "name": "iphone10",
           "price": 1154,
           "feature": true,
-          "company": "apple"
-  
+          "company": "apple",
+          ' category':"mobile",
       },
       {
           "name": "watch",
           "price": 204,
-          "company": "apple"
-  
+          "company": "apple",
+          ' category':"watch",
       },
       {
           "name": "iphone13",
           "price": 154,
           "feature": false,
-          "company": "apple"
-  
+          "company": "apple",
+          ' category':"mobile",
       },
       {
           "name": "android",
           "price": 154,
           "feature": false,
-          "company": "samsung"
-  
+          "company": "samsung",
+          ' category':"mobile",
       },
       {
           "name": "watch10",
           "price": 154,
-          "company": "samsung"
-  
+          "company": "samsung",
+          ' category':"watch",
       },
       {
           "name": "LED",
           "price": 154,
           "feature": false,
-          "company": "dell"
-  
+          "company": "dell",
+          ' category':"led",
       },
       {
         "name": "LED",
         "price": 157,
         "feature": false,
-        "company": "mi"
-
+        "company": "mi",
+        ' category':"led",
     }
 
   
