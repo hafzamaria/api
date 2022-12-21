@@ -13,7 +13,7 @@ mongoose.connect(dbURI);
 //     res.send('Hi i am live!')
 // })
 app.use(cors({/////jwt work
-  origin: ['http://localhost:5000', "*", ''],
+  origin: ['http://localhost:3000', "*", ''],
   
 }));
 //////////Schema/////////////////
@@ -59,7 +59,7 @@ const productSchema = new mongoose.Schema({ ///from mongoose
 //  ////////////////////////////////////////
 
 
-app.get('/Products', async (req , res) => {
+app.get('/', async (req , res) => {
 
   const { company , name , price,sort , select} = req.query;
 const queryObject = {};
